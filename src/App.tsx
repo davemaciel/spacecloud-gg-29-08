@@ -478,6 +478,7 @@ function App() {
     }
   ];
 
+  // Usamos os planos SCG normalmente, mas aplicaremos blur na renderização
   const activePlans = activeProvider === 'AZURE' ? AZUREPlans : SCGPlans;
 
   if (currentPage === 'privacy') {
@@ -577,12 +578,23 @@ function App() {
 
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {activePlans.map((plan, index) => (
-                <PlanCard 
+                <div 
                   key={index} 
-                  {...plan} 
-                  isPopular={index === 1}
-                  purchaseEnabled={activeProvider === 'AZURE'}
-                />
+                  className={`relative ${activeProvider === 'SCG' ? 'pointer-events-none' : ''}`}
+                >
+                  {activeProvider === 'SCG' && (
+                    <div className="absolute inset-0 bg-gray-900/70 backdrop-blur-lg z-10 rounded-xl flex items-center justify-center">
+                      <div className="bg-gray-800/80 px-6 py-3 rounded-lg text-white font-bold text-xl rotate-12">
+                        Em Breve
+                      </div>
+                    </div>
+                  )}
+                  <PlanCard 
+                    {...plan} 
+                    isPopular={index === 1}
+                    purchaseEnabled={activeProvider === 'AZURE'}
+                  />
+                </div>
               ))}
             </div>
           </div>
