@@ -577,25 +577,29 @@ function App() {
             />
 
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {activePlans.map((plan, index) => (
-                <div 
-                  key={index} 
-                  className={`relative ${activeProvider === 'SCG' ? 'pointer-events-none' : ''}`}
-                >
-                  {activeProvider === 'SCG' && (
-                    <div className="absolute inset-0 bg-gray-900/70 backdrop-blur-lg z-10 rounded-xl flex items-center justify-center">
-                      <div className="bg-gray-800/80 px-6 py-3 rounded-lg text-white font-bold text-xl rotate-12">
+              {activeProvider === 'AZURE' ? (
+                activePlans.map((plan, index) => (
+                  <PlanCard 
+                    key={index} 
+                    {...plan} 
+                    isPopular={index === 1}
+                    purchaseEnabled={true}
+                  />
+                ))
+              ) : (
+                // Planos SCG - Completamente escondidos com placeholders
+                [0, 1, 2].map((index) => (
+                  <div key={index} className="relative">
+                    <div className="bg-gray-800/30 rounded-xl shadow-xl p-6 h-[500px] flex flex-col items-center justify-center">
+                      <div className="absolute inset-0 bg-gray-900/95 backdrop-blur-xl rounded-xl"></div>
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-indigo-900/50 to-gray-900 rounded-xl"></div>
+                      <div className="relative z-10 bg-gray-800/90 px-8 py-4 rounded-lg text-white font-bold text-2xl rotate-12 shadow-lg border border-indigo-500/30">
                         Em Breve
                       </div>
                     </div>
-                  )}
-                  <PlanCard 
-                    {...plan} 
-                    isPopular={index === 1}
-                    purchaseEnabled={activeProvider === 'AZURE'}
-                  />
-                </div>
-              ))}
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </section>
