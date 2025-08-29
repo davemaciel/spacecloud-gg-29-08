@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+:root {
+  --app-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 100%);
+  color: #ffffff;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+body {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
+  height: var(--app-height);
+}
+
+#root {
+  isolation: isolate;
+  height: 100%;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(30, 41, 59, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #4f46e5, #6366f1);
+  border-radius: 3px;
+}
+
+/* Glass Effect */
+.glass-effect {
+  @apply bg-white/[0.03] backdrop-blur-lg border border-white/[0.05] shadow-lg;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #60a5fa, #a78bfa, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Buttons */
+.btn-primary {
+  @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  box-shadow: 0 4px 20px rgba(79, 70, 229, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
+  background: linear-gradient(135deg, #4338ca, #4f46e5);
+}
+
+/* Cards */
+.card {
+  @apply rounded-xl p-6 transition-all duration-300;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(79, 70, 229, 0.2);
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+/* Navigation */
+.nav-link {
+  @apply text-gray-300 hover:text-white transition-all duration-300 relative;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, #4f46e5, #6366f1);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Headings */
+.heading-primary {
+  @apply text-4xl md:text-5xl lg:text-6xl font-bold mb-6;
+  text-shadow: 0 4px 30px rgba(79, 70, 229, 0.3);
+  letter-spacing: -0.02em;
+}
+
+.heading-secondary {
+  @apply text-2xl md:text-3xl font-bold mb-4;
+  text-shadow: 0 2px 20px rgba(79, 70, 229, 0.2);
+}
+
+/* Container */
+.container {
+  @apply mx-auto px-4 sm:px-6 lg:px-8;
+  max-width: 1440px;
+}
+
+/* Sections */
+.section {
+  @apply py-16 md:py-20 relative;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(79, 70, 229, 0.1), transparent 70%);
+  pointer-events: none;
+}
+
+/* Form Elements */
+.input-primary {
+  @apply bg-gray-800/50 border border-gray-700/50 rounded-lg px-4 py-2 
+         text-white placeholder-gray-400 
+         focus:outline-none focus:ring-2 focus:ring-indigo-500 
+         focus:border-transparent transition-all duration-300;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Icons */
+.icon-gradient {
+  @apply text-transparent bg-clip-text;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+}
+
+/* Testimonials */
+.testimonial-card {
+  @apply card p-8;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+}
+
+/* FAQ */
+.faq-item {
+  @apply card mb-4 overflow-hidden;
+  border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.faq-question {
+  @apply p-6 flex justify-between items-center cursor-pointer;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.faq-answer {
+  @apply p-6 bg-gray-800/30;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .container {
+    @apply px-4;
+  }
+  
+  .heading-primary {
+    font-size: 1.875rem;
+  }
+
+  .grid {
+    @apply grid-cols-1;
+  }
+
+  .card {
+    @apply p-4;
+  }
+
+  .nav-link {
+    @apply text-sm;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 text-sm;
+  }
+
+  .testimonial-card {
+    @apply p-6;
+  }
+
+  .faq-item {
+    @apply mb-2;
+  }
+
+  .faq-question {
+    @apply p-4;
+  }
+
+  .faq-answer {
+    @apply p-4;
+  }
+}
